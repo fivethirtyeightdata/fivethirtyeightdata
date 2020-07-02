@@ -1,15 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# fivethirtyeightdata.test
+# fivethirtyeightdata
 
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.com/mariumtapal/fivethirtyeightdata.test.svg?branch=master)](https://travis-ci.com/mariumtapal/fivethirtyeightdata.test)
+status](https://travis-ci.com/fivethirtyeightdata/fivethirtyeightdata.svg?branch=master)](https://travis-ci.com/fivethirtyeightdata/fivethirtyeightdata)
 <!-- badges: end -->
 
-`fivethirtyeightdata.test` is an add-on R data package that contains the
+`fivethirtyeightdata` is an add-on R data package that contains the
 large datasets not found in the original `fivethirtyeight` package via a
 drat repository , published by FiveThirtyEight .
 
@@ -20,5 +20,5 @@ with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mariumtapal/fivethirtyeightdata.test")
+devtools::install_github("fivethirtyeightdata/fivethirtyeightdata")
 ```

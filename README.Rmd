@@ -13,13 +13,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# fivethirtyeightdata.test
+# fivethirtyeightdata
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/mariumtapal/fivethirtyeightdata.test.svg?branch=master)](https://travis-ci.com/mariumtapal/fivethirtyeightdata.test)
+[![Travis build status](https://travis-ci.com/fivethirtyeightdata/fivethirtyeightdata.svg?branch=master)](https://travis-ci.com/fivethirtyeightdata/fivethirtyeightdata)
 <!-- badges: end -->
 
-`fivethirtyeightdata.test` is an add-on R data package that contains the large datasets not found in the original `fivethirtyeight` package via a drat repository \url{https://github.com/mariumtapal/drat}, published by FiveThirtyEight \url{https://github.com/fivethirtyeight/data}.
+`fivethirtyeightdata` is an add-on R data package that contains the large datasets not found in the original `fivethirtyeight` package via a drat repository \url{https://github.com/fivethirtyeightdata/drat}, published by FiveThirtyEight \url{https://github.com/fivethirtyeight/data}.
 
 ## Installation
 
@@ -27,5 +27,5 @@ You can install the latest version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mariumtapal/fivethirtyeightdata.test")
+devtools::install_github("fivethirtyeightdata/fivethirtyeightdata")
 ```

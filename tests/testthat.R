@@ -1,4 +1,4 @@
 library(testthat)
-library(fivethirtyeightdata.test)
+library(fivethirtyeightdata)
 
-test_check("fivethirtyeightdata.test")
+test_check("fivethirtyeightdata")

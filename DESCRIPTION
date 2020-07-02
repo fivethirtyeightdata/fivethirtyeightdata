@@ -1,4 +1,4 @@
-Package: fivethirtyeightdata.test
+Package: fivethirtyeightdata
 Title: Data Package for Large fivethirtyeight datasets
 Version: 0.0.0.9000
 Authors@R: 
