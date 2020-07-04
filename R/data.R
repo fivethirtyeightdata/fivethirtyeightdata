@@ -15,3 +15,45 @@
 #' @details Data collected on Oct 19 and 20
 #' @source Twitter
 "senators"
+
+
+
+#' An Inconvenient Sequel
+#'
+#' The raw data behind the story
+#' "Al Gore's New Movie Exposes The Big Flaw In Online Movie Ratings"
+#' \url{https://fivethirtyeight.com/features/al-gores-new-movie-exposes-the-big-flaw-in-online-movie-ratings/}.
+#'
+#' @format  A data frame with 80,053 rows representing movie ratings and 27 variables:
+#' \describe{
+#'   \item{timestamp}{The date at which the rating was recorded.}
+#'   \item{respondents}{The number of respondents in a category associated with a given timestamp.}
+#'   \item{category}{The subgroups of respondents differentiated by demographics like gender, age, and nationality.}
+#'   \item{link}{The website associated with a given category's responses.}
+#'   \item{average}{The average rating reported by a given category.}
+#'   \item{mean}{The mean rating reported by a given category.}
+#'   \item{median}{The median rating reported by a given category.}
+#'   \item{votes_1}{The count of votes denoting a rating of one that respondents gave.}
+#'   \item{votes_2}{The count of votes denoting a rating of two that respondents gave.}
+#'   \item{votes_3}{The count of votes denoting a rating of three that respondents gave.}
+#'   \item{votes_4}{The count of votes denoting a rating of four that respondents gave.}
+#'   \item{votes_5}{The count of votes denoting a rating of five that respondents gave.}
+#'   \item{votes_6}{The count of votes denoting a rating of six that respondents gave.}
+#'   \item{votes_7}{The count of votes denoting a rating of seven that respondents gave.}
+#'   \item{votes_8}{The count of votes denoting a rating of eight that respondents gave.}
+#'   \item{votes_9}{The count of votes denoting a rating of nine that respondents gave.}
+#'   \item{votes_10}{The count of votes denoting a rating of ten that respondents gave.}
+#'   \item{pct_1}{The percentage of votes denoting a rating of one that respondents gave.}
+#'   \item{pct_2}{The percentage of votes denoting a rating of two that respondents gave.}
+#'   \item{pct_3}{The percentage of votes denoting a rating of three that respondents gave.}
+#'   \item{pct_4}{The percentage of votes denoting a rating of four that respondents gave.}
+#'   \item{pct_5}{The percentage of votes denoting a rating of five that respondents gave.}
+#'   \item{pct_6}{The percentage of votes denoting a rating of six that respondents gave.}
+#'   \item{pct_7}{The percentage of votes denoting a rating of seven that respondents gave.}
+#'   \item{pct_8}{The percentage of votes denoting a rating of eight that respondents gave.}
+#'   \item{pct_9}{The percentage of votes denoting a rating of nine that respondents gave.}
+#'   \item{pct_10}{The percentage of votes denoting a rating of ten that respondents gave.}
+#' }
+#' @source IMBD \url{https://www.imdb.com/title/tt6322922/ratings} and
+#' see \url{https://github.com/fivethirtyeight/data/tree/master/inconvenient-sequel}
+"ratings"
