@@ -47,3 +47,14 @@ goose <-
   "data-raw/goose/goose_rawdata.csv" %>%
   read_csv(na = c("", "NA"))
 usethis::use_data(goose, overwrite = TRUE)
+
+
+
+# mlb-elo ---------------------------------------------------------------------------
+mlb_elo <- read_csv("https://projects.fivethirtyeight.com/mlb-api/mlb_elo.csv") %>%
+  mutate(
+    playoff = as.factor(playoff),
+    playoff = ifelse(playoff == "<NA>", NA, playoff),
+    neutral = as.logical(neutral)
+  )
+usethis::use_data(mlb_elo, overwrite = TRUE)

@@ -38,7 +38,7 @@ A data frame with 80,053 rows representing movie ratings and 27 variables:
 }
 \source{
 IMBD \url{https://www.imdb.com/title/tt6322922/ratings} and
-see \url{https://github.com/fivethirtyeight/data/tree/master/inconvenient-sequel}
+see \url{https://github.com/fivethirtyeightdata/data/tree/master/inconvenient-sequel}
 }
 \usage{
 ratings
