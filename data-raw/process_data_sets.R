@@ -1,6 +1,7 @@
 library(dplyr)
 library(tidyr)
 library(readr)
+library(janitor)
 
 # twitter-ratio---------------------------------------------------------------------
 senators <- read_csv("data-raw/twitter-ratio/senators.csv") %>%
@@ -58,3 +59,18 @@ mlb_elo <- read_csv("https://projects.fivethirtyeight.com/mlb-api/mlb_elo.csv") 
     neutral = as.logical(neutral)
   )
 usethis::use_data(mlb_elo, overwrite = TRUE)
+
+
+
+# nba-carmelo---------------------------------------------------------------------
+nba_carmelo <- read_csv("https://projects.fivethirtyeight.com/nba-model/nba_elo.csv") %>%
+  clean_names() %>%
+  mutate(
+    team1 = as.factor(team1),
+    team2 = as.factor(team2),
+    playoff = ifelse(playoff == "t", TRUE, FALSE),
+    playoff = ifelse(is.na(playoff), FALSE, TRUE),
+    neutral = ifelse(neutral == 1, TRUE, FALSE)
+  ) %>%
+  select(-c(raptor1_pre, raptor2_pre, raptor_prob1, raptor_prob2))
+usethis::use_data(nba_carmelo, overwrite = TRUE)
