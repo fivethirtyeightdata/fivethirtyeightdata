@@ -8,7 +8,7 @@ senators <- read_csv("data-raw/twitter-ratio/senators.csv") %>%
     party = as.factor(party),
     state = as.factor(state),
     created_at = as.POSIXct(created_at, tz = "GMT", format = "%m/%d/%Y %H:%M"),
-    text =  gsub("[^\x01-\x7F]", "", text)
+    text = gsub("[^\x01-\x7F]", "", text)
   ) %>%
   select(created_at, user, everything())
 usethis::use_data(senators, overwrite = TRUE)
@@ -17,9 +17,9 @@ usethis::use_data(senators, overwrite = TRUE)
 
 # inconvenient-sequel ----------------------------------------------------------
 ratings <- read_csv("data-raw/inconvenient-sequel/ratings.csv") %>%
-  mutate(category = as.factor(category)) %>% 
+  mutate(category = as.factor(category)) %>%
   rename(
-    votes_1 = `1_votes`, votes_2 = `2_votes`, votes_3 = `3_votes`, 
+    votes_1 = `1_votes`, votes_2 = `2_votes`, votes_3 = `3_votes`,
     votes_4 = `4_votes`, votes_5 = `5_votes`, votes_6 = `6_votes`,
     votes_7 = `7_votes`, votes_8 = `8_votes`, votes_9 = `9_votes`,
     votes_10 = `10_votes`,
@@ -40,3 +40,10 @@ mayweather_mcgregor_tweets <- read_csv("data-raw/mayweather-mcgregor/tweets.csv"
   )
 usethis::use_data(mayweather_mcgregor_tweets, overwrite = TRUE)
 
+
+
+# goose ---------------------------------------------------------------
+goose <-
+  "data-raw/goose/goose_rawdata.csv" %>%
+  read_csv(na = c("", "NA"))
+usethis::use_data(goose, overwrite = TRUE)

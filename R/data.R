@@ -82,3 +82,29 @@
 #' Data was collected on August 27, 2017 between 12:05 a.m. and 1:15 a.m. EDT
 #' using the Twitter streaming API. \url{https://github.com/fivethirtyeight/data/tree/master/mayweather-mcgregor}
 "mayweather_mcgregor_tweets"
+
+
+
+#' The Save Ruined Relief Pitching. The Goose Egg Can Fix It.
+#'
+#' The raw data behind the story
+#' "The Save Ruined Relief Pitching. The Goose Egg Can Fix It."
+#' \url{https://fivethirtyeight.com/features/goose-egg-new-save-stat-relief-pitchers/}.
+#'
+#' @format A data frame with 30,962 rows representing pitchers and 12 variables:
+#' \describe{
+#'   \item{name}{Pitcher name}
+#'   \item{year}{Start year of season}
+#'   \item{team}{Retrosheet team code}
+#'   \item{league}{NL or AL}
+#'   \item{goose_eggs}{Goose eggs}
+#'   \item{broken_eggs}{Broken eggs}
+#'   \item{mehs}{Mehs}
+#'   \item{league_average_gpct}{League-average goose percentage}
+#'   \item{ppf}{Pitcher park factor}
+#'   \item{replacement_gpct}{Replacement-level goose percentage}
+#'   \item{gwar}{Goose Wins Above Replacement}
+#'   \item{key_retro}{Retrosheet unique player identifier}
+#' }
+#' @source Retrosheet \url{https://www.retrosheet.org/}
+"goose"
