@@ -29,3 +29,14 @@ ratings <- read_csv("data-raw/inconvenient-sequel/ratings.csv") %>%
   )
 usethis::use_data(ratings, overwrite = TRUE)
 
+
+
+# mayweather-mcgregor ---------------------------------------------------------------
+mayweather_mcgregor_tweets <- read_csv("data-raw/mayweather-mcgregor/tweets.csv") %>%
+  mutate(
+    emojis = as.logical(emojis),
+    retweeted = as.logical(retweeted),
+    id = as.character(id)
+  )
+usethis::use_data(mayweather_mcgregor_tweets, overwrite = TRUE)
+
