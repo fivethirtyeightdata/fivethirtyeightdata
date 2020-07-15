@@ -1,11 +1,8 @@
 Package: fivethirtyeightdata
-Title: Data Package for Large fivethirtyeight datasets
+Title: Data Package For Large Fivethirtyeight datasets
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Marium",
-           family = "Tapal",
-           role = c("aut", "cre"),
-           email = "mariumtapal@gmail.com")
+    person(given = "Marium", family = "Tapal", role = c("aut", "cre"), email = "mariumtapal@gmail.com", comment = c(ORCID = "0000-0001-5093-6462"))
 Description: This add-on data package to the fivethirtyeight R package contains 
     large datasets that exceeded the limit for hosting on CRAN.
 License: MIT + file LICENSE

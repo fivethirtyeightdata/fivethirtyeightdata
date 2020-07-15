@@ -149,3 +149,17 @@ comic_characters <-
   select(publisher, everything(), -c(year2, day)) 
 usethis::use_data(comic_characters, overwrite = TRUE)
 
+
+# nba-elo---------------------------------------------------------------------
+nba_all_elo <- read_csv("data-raw/nba-elo/nbaallelo.csv")%>%
+  arrange(game_id, `_iscopy`)%>%
+  mutate_if(is.character,as.factor)%>%
+  mutate(opp_win_equiv = lead(win_equiv), 
+         opp_seasongame = lead(seasongame, 1),
+         date_game = mdy(date_game), 
+         is_playoffs = as.logical(is_playoffs),
+         notes =  as.character(notes))%>%
+  filter(`_iscopy` == 0)%>%
+  select(-c(`_iscopy`, game_location))
+
+usethis::use_data(nba_all_elo, overwrite = TRUE)
