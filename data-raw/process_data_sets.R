@@ -74,3 +74,39 @@ nba_carmelo <- read_csv("https://projects.fivethirtyeight.com/nba-model/nba_elo.
   ) %>%
   select(-c(raptor1_pre, raptor2_pre, raptor_prob1, raptor_prob2))
 usethis::use_data(nba_carmelo, overwrite = TRUE)
+
+
+
+# spi_matches---------------------------------------------------------------------
+spi_matches <- read_csv("https://projects.fivethirtyeight.com/soccer-api/club/spi_matches.csv") 
+usethis::use_data(spi_matches, overwrite = TRUE)
+
+
+
+# nfl-elo---------------------------------------------------------------------
+nfl_elo <- 
+  "https://projects.fivethirtyeight.com/nfl-api/nfl_elo.csv" %>% 
+  read_csv() %>%
+  clean_names() %>%
+  mutate(
+    team1 = as.factor(team1),
+    team2 = as.factor(team2),
+    neutral = ifelse(neutral == 1, TRUE, FALSE)
+  )
+usethis::use_data(nfl_elo, overwrite = TRUE)
+
+
+
+# house-forecast-2018 ---------------------------------------------------------------
+house_district_forecast <- 
+  "https://projects.fivethirtyeight.com/congress-model-2018/house_district_forecast.csv" %>% 
+  read_csv() %>%
+  clean_names() %>%
+  mutate(
+    state = as.factor(state),
+    district = as.factor(district),
+    party = as.factor(party),
+    model = as.factor(model)
+  ) %>%
+  select(-special)
+usethis::use_data(house_district_forecast, overwrite = TRUE)

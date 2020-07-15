@@ -188,3 +188,100 @@
 
 
 
+#' Match-by-match SPI ratings and forecasts back to 2016
+#'
+#' The raw data behind the stories "Club Soccer Predictions"
+#' \url{https://projects.fivethirtyeight.com/soccer-predictions/} and "Global Club Soccer Rankings"
+#' \url{https://projects.fivethirtyeight.com/global-club-soccer-rankings/}.
+#'
+#' @format The dataset is a data frame with 34,109 rows 
+#' representing soccer matches and 13 variables:
+#' \describe{
+#'   \item{date}{The date that the match took place.}
+#'   \item{league_id}{A numerical identifier of the league within which the match was played.}
+#'   \item{league}{League name.}
+#'   \item{team1}{One team that participated in the match.}
+#'   \item{team2}{The other team that participated in the match.}
+#'   \item{spi1}{The SPI score of team1.}
+#'   \item{spi2}{The SPI score of team2.}
+#'   \item{prob1}{The probability that team1 would have won the match.}
+#'   \item{prob2}{The probability that team2 would have won the match.}
+#'   \item{probtie}{The probability that the match would have resulted in a tie.}
+#'   \item{proj_score1}{The predicted number of goals that team1 would have scored.}
+#'   \item{proj_score2}{The predicted number of goals that team2 would have scored.}
+#'   \item{importance1}{}
+#'   \item{importance2}{}
+#'   \item{score1}{The number of goals that team1 scored.}
+#'   \item{score2}{The number of goals that team2 scored.}
+#'   \item{xg1}{}
+#'   \item{xg2}{}
+#'   \item{nsxg1}{}
+#'   \item{nsxg2}{}
+#'   \item{adj_score1}{}
+#'   \item{adj_score2}{}
+#' }
+#' @source See \url{https://github.com/fivethirtyeight/data/blob/master/soccer-spi/README.md}
+#' @seealso \code{\link[fivethirtyeight]{spi_global_rankings}}
+"spi_matches"
+
+
+
+#' The Complete History Of The NFL 2017 NFL Predictions
+#'
+#' The raw data behind the story
+#' "The Complete History of the NFL"
+#' \url{https://projects.fivethirtyeight.com/complete-history-of-the-nfl/}
+#' And our "2017 NFL Predictions"
+#' \url{https://projects.fivethirtyeight.com/2017-nfl-predictions/}
+#'
+#' @format The dataset is a data frame with 16,541 rows representing games and 14 variables:
+#' \describe{
+#'  \item{date}{Date}
+#'  \item{season}{Season year, 1920-2018}
+#'  \item{neutral}{TRUE if the game was played on neutral territory, FALSE if not}
+#'  \item{playoff}{No description provided}
+#'  \item{team1}{The name of one participating team}
+#'  \item{team2}{The name of the other participating team}
+#'  \item{elo1_pre}{Team 1's Elo rating before the game}
+#'  \item{elo2_pre}{Team 2's Elo rating before the game}
+#'  \item{elo_prob1}{Team 1's probability of winning based on Elo rating}
+#'  \item{elo_prob2}{Team 2's probability of winning based on Elo rating}
+#'  \item{elo1_post}{Team 1's Elo rating after the game}
+#'  \item{elo2_post}{Team 2's Elo rating after the game}
+#'  \item{score1}{Points scored by Team 1}
+#'  \item{score2}{Points scored by Team 2}
+#' }
+#' @source See \url{https://projects.fivethirtyeight.com/nfl-api/nfl_elo.csv}
+"nfl_elo"
+
+
+
+#' 2018 House Forecast
+#'
+#' The raw data behind the story
+#' 'Forecasting the race for the House'
+#' \url{https://projects.fivethirtyeight.com/2018-midterm-election-forecast/house/}
+#'
+#' @format The dataset is a data frame with 302,859 rows representing
+#' district-level results of the classic, lite, and deluxe house forecasts
+#' since 2018/08/01 and 11 variables.
+#' \describe{
+#' \item{forecastdate}{date of the forecast}
+#' \item{state}{state of the forecast}
+#' \item{district}{district of the forecast}
+#' \item{candidate}{name of the candidate}
+#' \item{party}{party of the candidate}
+#' \item{incumbent}{whether the candidate is incumbent}
+#' \item{model}{the model of the forecast}
+#' \item{win_probability}{the probability of the corresponding party winning}
+#' \item{voteshare}{the voteshare of the corresponding party}
+#' \item{p10_voteshare}{the top 10 percentile of the voteshare}
+#' \item{p90_voteshare}{the top 00 percentile of the voteshare}
+#' }
+#' @note the original dataset included an empty column "special", which was removed.
+#' @source FiveThirtyEight’s House, Senate And Governor Models
+#' Methodology:
+#' \url{https://fivethirtyeight.com/methodology/how-fivethirtyeights-house-and-senate-models-work/}
+#' @seealso \code{\link[fivethirtyeight]{house_national_forecast}}
+#' 
+"house_district_forecast"
