@@ -2,6 +2,8 @@ library(dplyr)
 library(tidyr)
 library(readr)
 library(janitor)
+library(lubridate)
+library(stringr)
 
 # twitter-ratio---------------------------------------------------------------------
 senators <- read_csv("data-raw/twitter-ratio/senators.csv") %>%
@@ -110,3 +112,40 @@ house_district_forecast <-
   ) %>%
   select(-special)
 usethis::use_data(house_district_forecast, overwrite = TRUE)
+
+
+
+# comic-characters -------------------------------------------------------------
+# Get DC characters:
+comic_characters_dc <- 
+  "data-raw/comic-characters/dc-wikia-data.csv" %>% 
+  read_csv() %>% 
+  clean_names() %>% 
+  mutate(publisher = "DC")
+
+# Get Marvel characters:
+comic_characters_marvel <- 
+  "data-raw/comic-characters/marvel-wikia-data.csv" %>% 
+  read_csv() %>% 
+  clean_names() %>% 
+  mutate(publisher = "Marvel")
+
+# Merge two dataset and perform further data wrangling:
+comic_characters <-
+  comic_characters_dc %>% 
+  bind_rows(comic_characters_marvel) %>% 
+  separate(first_appearance, c("year2", "month"), ", ", remove = FALSE) %>%
+  mutate(
+    # If month was missing, set as January and day as 01:
+    month = ifelse(is.na(month), "01", month),
+    day = "01",
+    # Note some years missing:
+    date = ymd(paste(year, month, day, sep = "-")),
+    align = factor(
+      align, 
+      levels = c("Bad Characters", "Reformed Criminals", "Netural Characters", "Good Characters"),
+      ordered = TRUE)
+  ) %>%
+  select(publisher, everything(), -c(year2, day)) 
+usethis::use_data(comic_characters, overwrite = TRUE)
+
