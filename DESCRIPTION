@@ -2,7 +2,19 @@ Package: fivethirtyeightdata
 Title: Data Package For Large Fivethirtyeight datasets
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Marium", family = "Tapal", role = c("aut", "cre"), email = "mariumtapal@gmail.com", comment = c(ORCID = "0000-0001-5093-6462"))
+    c(
+    person("Albert Y.", "Kim", email = "albert.ys.kim@gmail.com", role = c("aut", "cre")),
+    person(given = "Marium", family = "Tapal", email = "mariumtapal@gmail.com", role = "aut", comment = c(ORCID = "0000-0001-5093-6462")),
+    person("Jennifer", "Chunn", email = "jenchunn@gmail.com", role = "aut"),
+    person("Meredith", "Manley", email = "meredithmanley24@aol.com", role = "ctb"),
+    person("Maggie", "Shea", email = "maggieshea97@gmail.com", role = "ctb"),
+    person("Starry Yujia", "Zhou", email = "zhouyujiaa@gmail.com", role = "ctb"),
+    person("Kara", "Van Allen", email = "kkv354@gmail.com", role = "ctb"),
+    person("Jessica", "Keast", email = "jeskeast@gmail.com", role = "ctb"),
+    person("Danica", "Miguel", email = "dmiguel@smith.edu", role = "ctb"),
+    person("Irene", "Ryan", email = "ryan.irene3@gmail.com", role = "ctb"),
+    person("Rana", "Gahwagy", email = "r.w.g1@hotmail.com", role="ctb")
+    )
 Description: This add-on data package to the fivethirtyeight R package contains 
     large datasets that exceeded the limit for hosting on CRAN.
 License: MIT + file LICENSE
@@ -11,6 +23,32 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown,
+    broom,
+    corrplot,
+    dplyr,
+    fivethirtyeight,
+    fmsb,
+    ggplot2,
+    ggraph,
+    ggthemes,
+    gridExtra,
+    highcharter,
+    hunspell,
+    igraph,
+    janitor,
+    lubridate,
+    magrittr,
+    readr,
+    scales,
+    stringr,
+    textdata,
+    tibble,
+    tidyr,
+    tidytext,
+    wordcloud
 Depends: 
     R (>= 2.10)
+VignetteBuilder: knitr

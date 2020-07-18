@@ -1,3 +1,5 @@
+# Datasets documented by Maggie Shea
+
 #' Senator Dataset
 #' @format A data frame with 288,615 rows representing tweets and 10 variables:
 #' \describe{
@@ -17,6 +19,96 @@
 "senators"
 
 
+#' The Worst Tweeter in Politics Isn't Trump
+#'
+#' The raw data behind:
+#' "The Worst Tweeter in Politics Isn't Trump"
+#' \url{https://fivethirtyeight.com/features/the-worst-tweeter-in-politics-isnt-trump/}
+#'
+#' Presidents Dataset:
+#' @format A data frame with 6439 rows describing individual tweets and 8 variables:
+#' \describe{
+#' \item{created_at}{The date and time the tweet was posted}
+#' \item{user}{The user posting the tweet}
+#' \item{text}{The text of the tweet}
+#' \item{url}{The link to the tweet}
+#' \item{replies}{The number of replies to the tweet}
+#' \item{retweets}{The number of retweets}
+#' \item{favorites}{The number of favorites}
+#' }
+#' @details Data on President Obama's tweets collected on Oct 20, President Trump's tweets collected on Oct 23.
+#' @source Twitter \url{https://twitter.com/BarackObama} and \url{https://twitter.com/realDonaldTrump}
+"twitter_presidents"
+
+
+
+#' The Complete History Of The NFL 2017 NFL Predictions
+#'
+#' The raw data behind the story
+#' "The Complete History of the NFL"
+#' \url{https://projects.fivethirtyeight.com/complete-history-of-the-nfl/}
+#' And our "2017 NFL Predictions"
+#' \url{https://projects.fivethirtyeight.com/2017-nfl-predictions/}
+#'
+#' @format The dataset is a data frame with 16,541 rows representing games and 14 variables:
+#' \describe{
+#'  \item{date}{Date}
+#'  \item{season}{Season year, 1920-2018}
+#'  \item{neutral}{TRUE if the game was played on neutral territory, FALSE if not}
+#'  \item{playoff}{No description provided}
+#'  \item{team1}{The name of one participating team}
+#'  \item{team2}{The name of the other participating team}
+#'  \item{elo1_pre}{Team 1's Elo rating before the game}
+#'  \item{elo2_pre}{Team 2's Elo rating before the game}
+#'  \item{elo_prob1}{Team 1's probability of winning based on Elo rating}
+#'  \item{elo_prob2}{Team 2's probability of winning based on Elo rating}
+#'  \item{elo1_post}{Team 1's Elo rating after the game}
+#'  \item{elo2_post}{Team 2's Elo rating after the game}
+#'  \item{score1}{Points scored by Team 1}
+#'  \item{score2}{Points scored by Team 2}
+#' }
+#' @source See \url{https://projects.fivethirtyeight.com/nfl-api/nfl_elo.csv}
+"nfl_elo"
+
+
+#' The Complete History Of The NBA
+#' 2017-18 NBA Predictions
+#'
+#' The raw data behind the story
+#' "The Complete History Of The NBA"
+#' \url{https://projects.fivethirtyeight.com/complete-history-of-the-nba/}
+#' and our "2017-18 NBA Predictions"
+#' \url{https://projects.fivethirtyeight.com/2018-nba-predictions/}
+#'
+#' @format A data frame with 69,465 rows representing games and 20 variables:
+#' \describe{
+#'  \item{date}{Date}
+#'  \item{season}{Season year, 1947-2018}
+#'  \item{neutral}{TRUE if the game was played on neutral territory, FALSE if not}
+#'  \item{playoff}{TRUE if the game was a playoff game, FALSE if not}
+#'  \item{team1}{The name of one participating team}
+#'  \item{team2}{The name of the other participating team}
+#'  \item{elo1_pre}{Team 1's Elo rating before the game}
+#'  \item{elo2_pre}{Team 2's Elo rating before the game}
+#'  \item{elo_prob1}{Team 1's probability of winning based on Elo rating}
+#'  \item{elo_prob2}{Team 2's probability of winning based on Elo rating}
+#'  \item{elo1_post}{Team 1's Elo rating after the game}
+#'  \item{elo2_post}{Team 2's Elo rating after the game}
+#'  \item{carmelo1_pre}{Team 1's CARMELO rating before the game}
+#'  \item{carmelo2_pre}{Team 2's CARMELO rating before the game}
+#'  \item{carmelo1_post}{Team 1's CARMELO rating after the game}
+#'  \item{carmelo2_post}{Team 2's CARMELO rating after the game}
+#'  \item{carmelo_prob1}{Team 1's probability winning based on CARMELO rating}
+#'  \item{carmelo_prob2}{Team 2's probability of winning based on CARMELO rating}
+#'  \item{score1}{Points scored by Team 1}
+#'  \item{score2}{Points scored by Team 2}
+#' }
+#' @source See \url{https://projects.fivethirtyeight.com/nba-model/nba_elo.csv}
+"nba_carmelo"
+
+
+
+# Datasets documented by Meredith Manley
 
 #' An Inconvenient Sequel
 #'
@@ -59,7 +151,6 @@
 "ratings"
 
 
-
 #' Mayweather Vs McGregor Tweets
 #'
 #' The raw data behind the story
@@ -82,33 +173,6 @@
 #' Data was collected on August 27, 2017 between 12:05 a.m. and 1:15 a.m. EDT
 #' using the Twitter streaming API. \url{https://github.com/fivethirtyeightdata/data/tree/master/mayweather-mcgregor}
 "mayweather_mcgregor_tweets"
-
-
-
-#' The Save Ruined Relief Pitching. The Goose Egg Can Fix It.
-#'
-#' The raw data behind the story
-#' "The Save Ruined Relief Pitching. The Goose Egg Can Fix It."
-#' \url{https://fivethirtyeight.com/features/goose-egg-new-save-stat-relief-pitchers/}.
-#'
-#' @format A data frame with 30,962 rows representing pitchers and 12 variables:
-#' \describe{
-#'   \item{name}{Pitcher name}
-#'   \item{year}{Start year of season}
-#'   \item{team}{Retrosheet team code}
-#'   \item{league}{NL or AL}
-#'   \item{goose_eggs}{Goose eggs}
-#'   \item{broken_eggs}{Broken eggs}
-#'   \item{mehs}{Mehs}
-#'   \item{league_average_gpct}{League-average goose percentage}
-#'   \item{ppf}{Pitcher park factor}
-#'   \item{replacement_gpct}{Replacement-level goose percentage}
-#'   \item{gwar}{Goose Wins Above Replacement}
-#'   \item{key_retro}{Retrosheet unique player identifier}
-#' }
-#' @source Retrosheet \url{https://www.retrosheet.org/}
-"goose"
-
 
 
 #' MLB Elo
@@ -150,44 +214,6 @@
 "mlb_elo"
 
 
-
-#' The Complete History Of The NBA
-#' 2017-18 NBA Predictions
-#'
-#' The raw data behind the story
-#' "The Complete History Of The NBA"
-#' \url{https://projects.fivethirtyeight.com/complete-history-of-the-nba/}
-#' and our "2017-18 NBA Predictions"
-#' \url{https://projects.fivethirtyeight.com/2018-nba-predictions/}
-#'
-#' @format A data frame with 69,465 rows representing games and 20 variables:
-#' \describe{
-#'  \item{date}{Date}
-#'  \item{season}{Season year, 1947-2018}
-#'  \item{neutral}{TRUE if the game was played on neutral territory, FALSE if not}
-#'  \item{playoff}{TRUE if the game was a playoff game, FALSE if not}
-#'  \item{team1}{The name of one participating team}
-#'  \item{team2}{The name of the other participating team}
-#'  \item{elo1_pre}{Team 1's Elo rating before the game}
-#'  \item{elo2_pre}{Team 2's Elo rating before the game}
-#'  \item{elo_prob1}{Team 1's probability of winning based on Elo rating}
-#'  \item{elo_prob2}{Team 2's probability of winning based on Elo rating}
-#'  \item{elo1_post}{Team 1's Elo rating after the game}
-#'  \item{elo2_post}{Team 2's Elo rating after the game}
-#'  \item{carmelo1_pre}{Team 1's CARMELO rating before the game}
-#'  \item{carmelo2_pre}{Team 2's CARMELO rating before the game}
-#'  \item{carmelo1_post}{Team 1's CARMELO rating after the game}
-#'  \item{carmelo2_post}{Team 2's CARMELO rating after the game}
-#'  \item{carmelo_prob1}{Team 1's probability winning based on CARMELO rating}
-#'  \item{carmelo_prob2}{Team 2's probability of winning based on CARMELO rating}
-#'  \item{score1}{Points scored by Team 1}
-#'  \item{score2}{Points scored by Team 2}
-#' }
-#' @source See \url{https://projects.fivethirtyeight.com/nba-model/nba_elo.csv}
-"nba_carmelo"
-
-
-
 #' Match-by-match SPI ratings and forecasts back to 2016
 #'
 #' The raw data behind the stories "Club Soccer Predictions"
@@ -226,35 +252,35 @@
 
 
 
-#' The Complete History Of The NFL 2017 NFL Predictions
+# Datasets originally documented by Jennifer Chunn
+
+#' The Save Ruined Relief Pitching. The Goose Egg Can Fix It.
 #'
 #' The raw data behind the story
-#' "The Complete History of the NFL"
-#' \url{https://projects.fivethirtyeight.com/complete-history-of-the-nfl/}
-#' And our "2017 NFL Predictions"
-#' \url{https://projects.fivethirtyeight.com/2017-nfl-predictions/}
+#' "The Save Ruined Relief Pitching. The Goose Egg Can Fix It."
+#' \url{https://fivethirtyeight.com/features/goose-egg-new-save-stat-relief-pitchers/}.
 #'
-#' @format The dataset is a data frame with 16,541 rows representing games and 14 variables:
+#' @format A data frame with 30,962 rows representing pitchers and 12 variables:
 #' \describe{
-#'  \item{date}{Date}
-#'  \item{season}{Season year, 1920-2018}
-#'  \item{neutral}{TRUE if the game was played on neutral territory, FALSE if not}
-#'  \item{playoff}{No description provided}
-#'  \item{team1}{The name of one participating team}
-#'  \item{team2}{The name of the other participating team}
-#'  \item{elo1_pre}{Team 1's Elo rating before the game}
-#'  \item{elo2_pre}{Team 2's Elo rating before the game}
-#'  \item{elo_prob1}{Team 1's probability of winning based on Elo rating}
-#'  \item{elo_prob2}{Team 2's probability of winning based on Elo rating}
-#'  \item{elo1_post}{Team 1's Elo rating after the game}
-#'  \item{elo2_post}{Team 2's Elo rating after the game}
-#'  \item{score1}{Points scored by Team 1}
-#'  \item{score2}{Points scored by Team 2}
+#'   \item{name}{Pitcher name}
+#'   \item{year}{Start year of season}
+#'   \item{team}{Retrosheet team code}
+#'   \item{league}{NL or AL}
+#'   \item{goose_eggs}{Goose eggs}
+#'   \item{broken_eggs}{Broken eggs}
+#'   \item{mehs}{Mehs}
+#'   \item{league_average_gpct}{League-average goose percentage}
+#'   \item{ppf}{Pitcher park factor}
+#'   \item{replacement_gpct}{Replacement-level goose percentage}
+#'   \item{gwar}{Goose Wins Above Replacement}
+#'   \item{key_retro}{Retrosheet unique player identifier}
 #' }
-#' @source See \url{https://projects.fivethirtyeight.com/nfl-api/nfl_elo.csv}
-"nfl_elo"
+#' @source Retrosheet \url{https://www.retrosheet.org/}
+"goose"
 
 
+
+# Datasets originally documented by Starry Zhou
 
 #' 2018 House Forecast
 #'
@@ -288,6 +314,8 @@
 
 
 
+# Datasets originally documented by Albert Y. Kim
+
 #' Comic Books Are Still Made By Men, For Men And About Men
 #'
 #' The raw data behind the story
@@ -303,7 +331,7 @@
 #'   \item{page_id}{The unique identifier for that characters page within the wikia}
 #'   \item{name}{The name of the character}
 #'   \item{urlslug}{The unique url within the wikia that takes you to the character}
-#'   \item{id}{The identity status of the character (Secret Identity, Public identity, [on marvel only: No Dual Identity])}
+#'   \item{id}{The identity status of the character (Secret Identity, Public identity, (on marvel only: No Dual Identity)}
 #'   \item{align}{If the character is Good, Bad or Neutral}
 #'   \item{eye}{Eye color of the character}
 #'   \item{hair}{Hair color of the character}
@@ -324,6 +352,48 @@
 "comic_characters"
 
 
+
+# Datasets originally documented by Kara Van Allen
+
+#' @name nba_elo
+#' @rdname nba_elo
+#' 
+#' @title NBA Elo Ratings
+#' 
+#' @description  The raw data behind all nba predictions, including the story
+#' "The Complete History of the NBA"
+#' \url{https://projects.fivethirtyeight.com/complete-history-of-the-nba}
+#' 
+NULL
+
+#' @rdname nba_elo
+#' 
+#' @format 2 data frames about NBA Elo prediction ratings 
+#' 
+#' @section nba_elo:
+#' A data frame with 69465 rows representing every game in the NBA, and 24 variables:
+#' \describe{
+#'   \item{date}{Date}
+#'   \item{season}{the season in which the game was played}
+#'   \item{neutral}{True if the game was played on neutral territory, False if not}
+#'   \item{playoff}{True if the game was played in a playoff, False if not}
+#'   \item{team1}{name of first team}
+#'   \item{team2}{name of second team}
+#'   \item{elo1_pre}{Team 1 Elo rating before game}
+#'   \item{elo2_pre}{Team 2 Elo rating before game}
+#'   \item{elo_prob1}{Team 1's probability of winning based on Elo rating}
+#'   \item{elo_prob2}{Team 2's probability of winning based on Elo rating}
+#'   \item{elo1_post}{Team 1 Elo rating after the game}
+#'   \item{elo2_post}{Team 2 Elo rating after the game}
+#'   \item{score1}{the score of team 1}
+#'   \item{score2}{the score of team 2}
+#'   }
+#'   
+"nba_elo"
+
+
+
+# Datasets originally documented by Jessica Keast
 
 #' The Complete History Of The NBA
 #' 
@@ -359,3 +429,222 @@
 #' 
 #' @source Basketball Reference: \url{http://www.basketball-reference.com/}.
 "nba_all_elo"
+
+
+
+# Datasets originally documented by Danica Miguel
+
+#' @name nba_raptor
+#' @rdname nba_raptor
+#' 
+#' @title NBA Raptor
+#' 
+#' @description The raw data behind the story 
+#' "Introducing RAPTOR, Our New Metric For The Modern NBA"
+#' \url{https://fivethirtyeight.com/features/introducing-raptor-our-new-metric-for-the-modern-nba}.
+#' 
+NULL
+
+
+#' @rdname nba_raptor
+#' 
+#' @format 2 dataframes about Raptor players and teams by era
+#' 
+#' @section raptor_by_player:
+#' A dataframe with 20492 rows representing every player broken out by season and era and 22 variables:
+#' \describe{
+#'  \item{era}{Historical (since the 1976 ABA-NBA merger) or Modern (since 2014)}
+#'  \item{player_name}{Player Name}
+#'  \item{player_id}{Player ID as found on \url{https://www.basketball-reference.com/}}
+#'  \item{season}{Season}
+#'  \item{poss}{Possessions played}
+#'  \item{mp}{Minutes played}
+#'  \item{raptor_box_offense}{Points above average per 100 possessions added by player on offense, based only on box score estimate
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_box_defense}{Points above average per 100 possessions added by player on defense, based only on box score estimate
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_box_total}{Points above average per 100 possessions added by player, based only on box score estimate
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_onoff_offense}{Points above average per 100 possessions added by player on offense, based only on plus-minus data
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_onoff_defense}{Points above average per 100 possessions added by player on defense, based only on plus-minus data
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_onoff_total}{Points above average per 100 possessions added by player, based only on plus-minus data
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_offense}{Points above average per 100 possessions added by player on offense, using both box and on-off components}
+#'  \item{raptor_defense}{Points above average per 100 possessions added by player on defense, using both box and on-off components}
+#'  \item{raptor_total}{Points above average per 100 possessions added by player on both offense and defense, using both box and on-off components}
+#'  \item{war_total}{Wins Above Replacement between regular season and playoffs}
+#'  \item{war_reg_season}{Wins Above Replacement for regular season}
+#'  \item{war_playoffs}{Wins Above Replacement for playoffs}
+#'  \item{predator_offense}{Predictive points above average per 100 possessions added by player on offense}
+#'  \item{predator_defense}{Predictive points above average per 100 possessions added by player on defense}
+#'  \item{predator_total}{Predictive points above average per 100 possessions added by player on both offense and defense}
+#'  \item{pace_impact}{Player impact on team possessions per 48 minutes}
+#' }
+"raptor_by_player"
+
+
+#' @rdname nba_raptor
+#' @section raptor_by_team:
+#' A dataframe with 32055 rows representing every team broken out by team, season, season_type, and era and 24 variables:
+#' \describe{
+#'  \item{era}{Historical (since the 1976 ABA-NBA merger) or Modern (since 2014)}
+#'  \item{player_name}{Player name}
+#'  \item{player_id}{Player ID as found on \url{https://www.basketball-reference.com/}}
+#'  \item{season}{Season}
+#'  \item{season_type}{Regular season (RS) or playoff (PO)}
+#'  \item{team}{Basketball-Reference ID of team}
+#'  \item{poss}{Possessions played}
+#'  \item{mp}{Minutes played}
+#'  \item{raptor_box_offense}{Points above average per 100 possessions added by player on offense, based only on box score estimate
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_box_defense}{Points above average per 100 possessions added by player on defense, based only on box score estimate
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_box_total}{Points above average per 100 possessions added by player, based only on box score estimate
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_onoff_offense}{Points above average per 100 possessions added by player on offense, based only on plus-minus data
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_onoff_defense}{Points above average per 100 possessions added by player on defense, based only on plus-minus data
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_onoff_total}{Points above average per 100 possessions added by player, based only on plus-minus data
+#'       (Values are missing when era is historical)}
+#'  \item{raptor_offense}{Points above average per 100 possessions added by player on offense, using both box and on-off components}
+#'  \item{raptor_defense}{Points above average per 100 possessions added by player on defense, using both box and on-off components}
+#'  \item{raptor_total}{Points above average per 100 possessions added by player on both offense and defense, using both box and on-off components}
+#'  \item{war_total}{Wins Above Replacement between regular season and playoffs}
+#'  \item{war_reg_season}{Wins Above Replacement for regular season}
+#'  \item{war_playoffs}{Wins Above Replacement for playoffs}
+#'  \item{predator_offense}{Predictive points above average per 100 possessions added by player on offense}
+#'  \item{predator_defense}{Predictive points above average per 100 possessions added by player on defense}
+#'  \item{predator_total}{Predictive points above average per 100 possessions added by player on both offense and defense}
+#'  \item{pace_impact}{Player impact on team possessions per 48 minutes}
+#' }
+"raptor_by_team"
+
+
+
+# Datasets originally documented by Rana Gahwagy
+
+#' The Twins’ Magical Run Will Likely Go Through The Yankees. (Because Of Course.)
+#' 
+#' The raw data behind the story 
+#' "The Twins’ Magical Run Will Likely Go Through The Yankees. (Because Of Course.)"
+#' \url{https://fivethirtyeight.com/features/the-yankees-always-have-the-twins-number-will-this-postseason-be-different/}
+#' 
+#' @format A data frame contains 98,796 rows representing Quasi-Win Shares(QWS), prorated to 162 team games, for every player from 1901 as of Sept. 27, 2019 and,  and 16 variables:
+#' \describe{
+#'   \item{name_common}{Player name}
+#'   \item{age}{Player's age on June 30 of season}
+#'   \item{player_id}{Player's \url{https://www.baseball-reference.com/} ID}
+#'   \item{year_id}{Season}
+#'   \item{team_id}{Baseball-Reference ID of team}
+#'   \item{lg_id}{League of team}
+#'   \item{pct_pt}{Share of total team playing time (measured by plate appearances and leverage-weighted innings) for player}
+#'   \item{war162}{Wins Above Replacement per 162 team games, averaging B-R and FG WAR}
+#'   \item{quasi_ws}{Quasi Win Shares. Three times total wins created per 162 games; generated by adding WAR162 to wins BELOW replacement (determined by playing time) and rounding to nearest whole number}
+#'   \item{stint_id}{Order of team stints for player within season}
+#'   \item{franch_id}{Lahman DB franchise ID for team}
+#'   \item{prev_franch}{Previous franchise played for (NA if player debuted for team)}
+#'   \item{year_acq}{First season for player with that franchise}
+#'   \item{year_left}{Last season for player with that franchise}
+#'   \item{next_franch}{Next franchise played for (NA if player retired with or is currently on team)}
+#'   \item{p}{If played as a Pitcher}
+#'   \item{c}{If played as a Catcher}
+#'   \item{X1b}{If played as a First Base}
+#'   \item{X2b}{If played as a Second Base}
+#'   \item{X3b}{If played as a Third Base}
+#'   \item{ss}{If played as a Shortstop}
+#'   \item{lf}{If played as a Left Field}
+#'   \item{cf}{If played as a Center Field}
+#'   \item{rf}{If played as a Right Field}
+#'   }
+#' @source What’s The Best Way To Build a Major League Baseball Team? \url{https://fivethirtyeight.com/features/whats-the-best-way-to-build-a-major-league-baseball-team/}
+"quasi_winshares"
+
+
+
+# Datasets originally documented by Irene Ryan
+
+#' Riddler Nation - Castles Puzzle
+
+#' @description This contains the data behind the submissions for three rounds of the castles strategy puzzles: 
+#'
+#' Can You Rule Riddler Nation? \url{https://fivethirtyeight.com/features/can-you-rule-riddler-nation/}
+#'
+#' The Battle For Riddler Nation, Round 2 \url{http://fivethirtyeight.com/features/the-battle-for-riddler-nation-round-2/}
+#'
+#' Are You The Best Warlord? \url{https://fivethirtyeight.com/features/are-you-the-best-warlord/}
+#' 
+#'
+#' Readers were asked to submit a strategy for the following “Colonel Blotto”-style game: 
+#'
+#'  
+#' In a distant, war-torn land, there are 10 castles. There are two warlords: you and your archenemy. Each castle has its own strategic value for a would-be conqueror. Specifically, the castles are worth 1, 2, 3, …, 9, and 10 victory points. You and your enemy each have 100 soldiers to distribute, any way you like, to fight at any of the 10 castles. Whoever sends more soldiers to a given castle conquers that castle and wins its victory points. If you each send the same number of troops, you split the points. You don’t know what distribution of forces your enemy has chosen until the battles begin. Whoever wins the most points wins the war. 
+#'
+#' Submit a plan distributing your 100 soldiers among the 10 castles. Once I receive all your battle plans, I’ll adjudicate all the possible one-on-one matchups. Whoever wins the most wars wins the battle royale and is crowned king or queen of Riddler Nation!
+
+#' @format A data frame with 13870 rows representing users, and 3 variables:
+#' \describe{
+#'   \item{user}{ID for the user who submitted the response}
+#'   \item{castle}{which castle the user chose}
+#'   \item{number_of_soldiers}{the number of soldiers they assigned to the castle}
+#'   \item{strategy}{their reasoning/strategy for the number of soldiers}
+#'   }
+
+"castle_solutions"
+
+
+
+
+#' Riddler Nation - Castles Puzzle 2
+
+#' @description This contains the data behind the submissions for three rounds of the castles strategy puzzles: 
+#'
+#' The Battle For Riddler Nation, Round 2 \url{http://fivethirtyeight.com/features/the-battle-for-riddler-nation-round-2/} 
+#'
+#' Readers were asked to submit a strategy for the following “Colonel Blotto”-style game: 
+#'
+#'  
+#' In a distant, war-torn land, there are 10 castles. There are two warlords: you and your archenemy. Each castle has its own strategic value for a would-be conqueror. Specifically, the castles are worth 1, 2, 3, …, 9, and 10 victory points. You and your enemy each have 100 soldiers to distribute, any way you like, to fight at any of the 10 castles. Whoever sends more soldiers to a given castle conquers that castle and wins its victory points. If you each send the same number of troops, you split the points. You don’t know what distribution of forces your enemy has chosen until the battles begin. Whoever wins the most points wins the war. 
+#'
+#' Submit a plan distributing your 100 soldiers among the 10 castles. Once I receive all your battle plans, I’ll adjudicate all the possible one-on-one matchups. Whoever wins the most wars wins the battle royale and is crowned king or queen of Riddler Nation!
+
+#' @format A data frame with 9320 rows representing users, and 3 variables:
+#' \describe{
+#'   \item{user}{ID for the user who submitted the response}
+#'   \item{castle}{which castle the user chose}
+#'   \item{number_of_soldiers}{the number of soldiers they assigned to the castle}
+#'   \item{strategy}{their reasoning/strategy for the number of soldiers}
+#'   }
+#'   
+"castle_solutions_2"
+
+
+
+
+#' Riddler Nation - Castles Puzzle Final
+
+#' @description This contains the data behind the submissions for three rounds of the castles strategy puzzles: 
+
+#' Are You The Best Warlord? \url{https://fivethirtyeight.com/features/are-you-the-best-warlord/}
+#' 
+#'
+#' Readers were asked to submit a strategy for the following “Colonel Blotto”-style game: 
+#'
+#'  
+#' In a distant, war-torn land, there are 10 castles. There are two warlords: you and your archenemy. Each castle has its own strategic value for a would-be conqueror. Specifically, the castles are worth 1, 2, 3, …, 9, and 10 victory points. You and your enemy each have 100 soldiers to distribute, any way you like, to fight at any of the 10 castles. Whoever sends more soldiers to a given castle conquers that castle and wins its victory points. If you each send the same number of troops, you split the points. You don’t know what distribution of forces your enemy has chosen until the battles begin. Whoever wins the most points wins the war. 
+#'
+#' Submit a plan distributing your 100 soldiers among the 10 castles. Once I receive all your battle plans, I’ll adjudicate all the possible one-on-one matchups. Whoever wins the most wars wins the battle royale and is crowned king or queen of Riddler Nation!
+
+#' @format A data frame with 14660 rows representing users, and 3 variables:
+#' \describe{
+#'   \item{user}{ID for the user who submitted the response}
+#'   \item{castle}{which castle the user chose}
+#'   \item{number_of_soldiers}{the number of soldiers they assigned to the castle}
+#'   \item{strategy}{their reasoning/strategy for the number of soldiers}
+#'   }
+#'   
+"castle_solutions_3"
+
+

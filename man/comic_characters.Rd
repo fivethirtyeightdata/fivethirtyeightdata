@@ -12,7 +12,7 @@ representing characters and 16 variables:
 \item{page_id}{The unique identifier for that characters page within the wikia}
 \item{name}{The name of the character}
 \item{urlslug}{The unique url within the wikia that takes you to the character}
-\item{id}{The identity status of the character (Secret Identity, Public identity, \link{on marvel only: No Dual Identity})}
+\item{id}{The identity status of the character (Secret Identity, Public identity, (on marvel only: No Dual Identity)}
 \item{align}{If the character is Good, Bad or Neutral}
 \item{eye}{Eye color of the character}
 \item{hair}{Hair color of the character}
