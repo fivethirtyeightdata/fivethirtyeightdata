@@ -38,3 +38,17 @@ You can install the developmental version from [GitHub](https://github.com/fivet
 # install.packages("devtools")
 devtools::install_github("fivethirtyeightdata/fivethirtyeightdata")
 ```
+
+## Datasets
+
+The following datasets are available in full in this package:
+```{r echo=FALSE}
+library(magrittr)
+data(package = "fivethirtyeightdata")$result[, c("Item", "Title")] %>%
+  tibble::as_tibble()
+```
+
+
+## More Information
+
+For more information, please visit the `fivethirtyeight` [website](fivethirtyeight-r.netlify.com/).
