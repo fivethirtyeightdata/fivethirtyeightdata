@@ -11,13 +11,30 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+library(dplyr)
+library(knitr)
+library(stringr)
+
+all_fivethirtyeightdata_datasets <- data(package = "fivethirtyeightdata")$result[, c("Item", "Title")] %>%
+  as_tibble()
 ```
+
+
 
 # fivethirtyeightdata
 
-`fivethirtyeightdata` is an add-on R data package that contains the large datasets not found in the original [`fivethirtyeight`](https://github.com/rudeboybert/fivethirtyeight) package, published by FiveThirtyEight \url{https://github.com/fivethirtyeight/data}.
+`fivethirtyeightdata` is an add-on R data package to the [`fivethirtyeight`](fivethirtyeight-r.netlify.com/) package that contains user-contributed `vignettes/`
+and `r all_fivethirtyeightdata_datasets %>% nrow()` datasets that could not be included in `fivethirtyeight` due to CRAN package size restrictions:
 
-The released version of this package is accessed using a [drat](https://github.com/fivethirtyeightdata/drat) repository made using the the `drat` package.
+```{r echo=FALSE}
+all_fivethirtyeightdata_datasets %>% 
+  mutate(Item = str_c("`", Item, "`")) %>% 
+  kable()
+```
+
+The released version of this package is accessed using a [drat](https://github.com/fivethirtyeightdata/drat) repository made using the `drat` package.
+
 
 ## Installation
 
@@ -37,3 +54,12 @@ You can install the developmental version from [GitHub](https://github.com/fivet
 devtools::install_github("fivethirtyeightdata/fivethirtyeightdata")
 ```
 
+## Usage 
+
+To load the `senators` dataset for example run:
+
+```{r, eval = FALSE}
+library(fivethirtyeight)
+library(fivethirtyeightdata)
+senators
+```
