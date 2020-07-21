@@ -1,0 +1,13 @@
+pandoc: 2.7.3
+pkgdown: 1.5.1
+pkgdown_sha: ~
+articles:
+  NBA: NBA.html
+  bechdel: bechdel.html
+  biopics: biopics.html
+  bob_ross: bob_ross.html
+  comics_gender: comics_gender.html
+  tarantino_swears: tarantino_swears.html
+  trump_twitter: trump_twitter.html
+last_built: 2020-07-21T19:37Z
+
