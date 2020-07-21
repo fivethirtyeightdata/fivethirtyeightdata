@@ -3,8 +3,9 @@ Title: Data Package For Large Fivethirtyeight datasets
 Version: 0.0.0.9000
 Authors@R: 
     c(
-    person("Albert Y.", "Kim", email = "albert.ys.kim@gmail.com", role = c("aut", "cre")),
-    person(given = "Marium", family = "Tapal", email = "mariumtapal@gmail.com", role = "aut", comment = c(ORCID = "0000-0001-5093-6462")),
+    person("Marium", "Tapal", email = "mariumtapal@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-5093-6462")),
+    person("Albert Y.", "Kim", email = "albert.ys.kim@gmail.com", role = "aut", comment = c(ORCID = "0000-0001-7824-306X")),
+    person("Chester", "Ismay", email = "chester.ismay@gmail.com", role = "aut", comment = c(ORCID = "0000-0003-2820-2547")),
     person("Jennifer", "Chunn", email = "jenchunn@gmail.com", role = "aut"),
     person("Meredith", "Manley", email = "meredithmanley24@aol.com", role = "ctb"),
     person("Maggie", "Shea", email = "maggieshea97@gmail.com", role = "ctb"),
