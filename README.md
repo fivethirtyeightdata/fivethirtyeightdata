@@ -30,30 +30,12 @@ included in `fivethirtyeight` due to CRAN package size restrictions:
 | `spi_matches`                | Match-by-match SPI ratings and forecasts back to 2016                           |
 | `twitter_presidents`         | The Worst Tweeter in Politics Isn’t Trump                                       |
 
-The released version of this package is accessed using a
+The released version of this package is hosted using a
 [drat](https://github.com/fivethirtyeightdata/drat) repository made
-using the `drat` package.
+using the the `drat` package.
 
-## Installation
-
-You can run the following to get the latest released version of
-`fivethirtyeightdata`:
-
-``` r
-install.packages(fivethirtyeightdata,
-  repos = "https://fivethirtyeightdata.github.io/drat/",
-  type = "source"
-)
-```
-
-You can install the developmental version from
-[GitHub](https://github.com/fivethirtyeightdata/fivethirtyeightdata)
-with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("fivethirtyeightdata/fivethirtyeightdata")
-```
+For more on using these data, see the GitHub repository for the
+`fivethirtyeight` package.
 
 ## Usage
 
