@@ -1,0 +1,36 @@
+---
+title: "fivethirtyeightdata"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fivethirtyeightdata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(fivethirtyeightdata)
+```
+
+
+`fivethirtyeightdata` is an add-on R data package that contains the large datasets not found in the original `fivethirtyeight` package hosted via a [drat](https://github.com/fivethirtyeightdata/drat) repository. The datasets are published by FiveThirtyEight \url{https://github.com/fivethirtyeight/data}.
+
+
+## Datasets
+
+The following datasets are available in full in this package:
+```{r echo=FALSE}
+library(magrittr)
+data(package = "fivethirtyeightdata")$result[, c("Item", "Title")] %>%
+  tibble::as_tibble()
+```
+
+## More Information
+
+For more information, please visit the `fivethirtyeight` [GitHub](https://github.com/rudeboybert/fivethirtyeight) page and [website](fivethirtyeight-r.netlify.com/).
