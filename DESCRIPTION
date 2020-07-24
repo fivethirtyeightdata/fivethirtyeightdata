@@ -1,6 +1,6 @@
 Package: fivethirtyeightdata
-Title: Data Package For Large Fivethirtyeight datasets
-Version: 0.0.0.9000
+Title: Data Package For Large FiveThirtyEight datasets
+Version: 0.1.0
 Authors@R: 
     c(
     person("Marium", "Tapal", email = "mariumtapal@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-5093-6462")),
