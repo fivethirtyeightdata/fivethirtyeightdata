@@ -7,14 +7,15 @@ Authors@R:
     person("Albert Y.", "Kim", email = "albert.ys.kim@gmail.com", role = "aut", comment = c(ORCID = "0000-0001-7824-306X")),
     person("Chester", "Ismay", email = "chester.ismay@gmail.com", role = "aut", comment = c(ORCID = "0000-0003-2820-2547")),
     person("Jennifer", "Chunn", email = "jenchunn@gmail.com", role = "aut"),
-    person("Meredith", "Manley", email = "meredithmanley24@aol.com", role = "ctb"),
+    person("Meredith", "Manley", email = "meredithmanley24@aol.com", role = "ctb", comment = c(ORCID = "0000-0001-7707-0654")),
     person("Maggie", "Shea", email = "maggieshea97@gmail.com", role = "ctb"),
     person("Starry Yujia", "Zhou", email = "zhouyujiaa@gmail.com", role = "ctb"),
+    person("Ben", "Baumer", email = "ben.baumer@gmail.com", role = "ctb", comment = c(ORCID = "0000-0002-3279-0516")),
     person("Kara", "Van Allen", email = "kkv354@gmail.com", role = "ctb"),
     person("Jessica", "Keast", email = "jeskeast@gmail.com", role = "ctb"),
     person("Danica", "Miguel", email = "dmiguel@smith.edu", role = "ctb"),
     person("Irene", "Ryan", email = "ryan.irene3@gmail.com", role = "ctb"),
-    person("Rana", "Gahwagy", email = "r.w.g1@hotmail.com", role="ctb")
+    person("Rana", "Gahwagy", email = "r.w.g1@hotmail.com", role="ctb", comment = c(ORCID = "0000-0002-6331-2840"))
     )
 Description: This add-on data package to the fivethirtyeight R package contains 
     large datasets that exceeded the limit for hosting on CRAN.
