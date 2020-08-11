@@ -4,9 +4,10 @@
 # fivethirtyeightdata
 
 `fivethirtyeightdata` is an add-on R data package to the
-[`fivethirtyeight`](fivethirtyeight-r.netlify.com/) package that
+[`fivethirtyeight`](fivethirtyeight-r.netlify.app/) package that
 contains user-contributed `vignettes/` and 19 datasets that could not be
-included in `fivethirtyeight` due to CRAN package size restrictions:
+included in `fivethirtyeight` due to CRAN package size
+restrictions:
 
 | Item                         | Title                                                                           |
 | :--------------------------- | :------------------------------------------------------------------------------ |
