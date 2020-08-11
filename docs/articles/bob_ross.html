@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fivethirtyeightdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -90,13 +90,13 @@
 
       
 
-      </header><script src="bob_ross_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Bob Ross - Joy of Painting</h1>
                         <h4 class="author">Jonathan Bouchet</h4>
             
-            <h4 class="date">2020-07-21</h4>
+            <h4 class="date">2020-08-11</h4>
       
       
       <div class="hidden name"><code>bob_ross.Rmd</code></div>
@@ -221,9 +221,9 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Paintings having more than '</span>, <span class="no">cut_features</span>,<span class="st">' features'</span>))</pre></body></html></div>
 <p><img src="bob_ross_files/figure-html/episode%20prep.-1.png" width="700"></p>
 </div>
-<div id="episodes-distribution-vs--their-number-of-features" class="section level3">
+<div id="episodes-distribution-vs-their-number-of-features" class="section level3">
 <h3 class="hasAnchor">
-<a href="#episodes-distribution-vs--their-number-of-features" class="anchor"></a>Episodes distribution vs. their number of features</h3>
+<a href="#episodes-distribution-vs-their-number-of-features" class="anchor"></a>Episodes distribution vs. their number of features</h3>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">per_episode_summary</span> <span class="kw">&lt;-</span> <span class="no">per_episode</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">sum</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">tot_features</span><span class="kw">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>()) <span class="kw">%&gt;%</span>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fivethirtyeightdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -90,14 +90,14 @@
 
       
 
-      </header><script src="bechdel_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Bechdel analysis using the <code>tidyverse</code>
 </h1>
                         <h4 class="author">Chester Ismay</h4>
             
-            <h4 class="date">2020-07-21</h4>
+            <h4 class="date">2020-08-11</h4>
       
       
       <div class="hidden name"><code>bechdel.Rmd</code></div>
@@ -229,7 +229,7 @@
 <p><img src="bechdel_files/figure-html/scatplot1-1.png" width="480"></p>
 <div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">gross_vs_budget</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">intgross_2013</span>) ~ <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">budget_2013</span>),
                       <span class="kw">data</span> <span class="kw">=</span> <span class="no">bechdel90_13</span>)
-<span class="fu"><a href="https://broom.tidymodels.org/reference/reexports.html">tidy</a></span>(<span class="no">gross_vs_budget</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">gross_vs_budget</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 2 x 5
 ##   term             estimate std.error statistic   p.value
 ##   &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -249,7 +249,7 @@
 <p><img src="bechdel_files/figure-html/scatplot2-1.png" width="480"></p>
 <div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">gross_vs_budget_binary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">intgross_2013</span>) ~ <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">budget_2013</span>) + <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">binary</span>),
                       <span class="kw">data</span> <span class="kw">=</span> <span class="no">bechdel90_13</span>)
-<span class="fu"><a href="https://broom.tidymodels.org/reference/reexports.html">tidy</a></span>(<span class="no">gross_vs_budget_binary</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">gross_vs_budget_binary</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 3 x 5
 ##   term               estimate std.error statistic   p.value
 ##   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -269,7 +269,7 @@
 <p><img src="bechdel_files/figure-html/scatplot3-1.png" width="700"></p>
 <div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">roi_vs_budget</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">roi_total</span>) ~ <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">budget_2013</span>),
                       <span class="kw">data</span> <span class="kw">=</span> <span class="no">bechdel90_13</span>)
-<span class="fu"><a href="https://broom.tidymodels.org/reference/reexports.html">tidy</a></span>(<span class="no">roi_vs_budget</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">roi_vs_budget</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 2 x 5
 ##   term             estimate std.error statistic  p.value
 ##   &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -290,7 +290,7 @@
 <p><img src="bechdel_files/figure-html/scatplot4-1.png" width="700"></p>
 <div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="no">roi_vs_budget_binary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">roi_total</span>) ~ <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="no">budget_2013</span>) + <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">binary</span>),
                       <span class="kw">data</span> <span class="kw">=</span> <span class="no">bechdel90_13</span>)
-<span class="fu"><a href="https://broom.tidymodels.org/reference/reexports.html">tidy</a></span>(<span class="no">roi_vs_budget_binary</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">roi_vs_budget_binary</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 3 x 5
 ##   term               estimate std.error statistic       p.value
 ##   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
