@@ -399,7 +399,7 @@ NULL
 #' 
 #' This directory contains the data behind the interactive 
 #' "The Complete History Of The NBA"
-#' \url{http://fivethirtyeight.com/interactives/the-complete-history-of-every-nba-team-by-elo}.
+#' \url{https://fivethirtyeight.com/interactives/the-complete-history-of-every-nba-team-by-elo}.
 #' 
 #' @format A data frame with 63157 rows representing basketball games and 23 variables:
 #' \describe{
@@ -427,7 +427,7 @@ NULL
 #' \item{forecast}{Elo-based chances of winning for the team in the team_id column, based on elo ratings and game location}
 #' \item{notes}{Additional information}}
 #' 
-#' @source Basketball Reference: \url{http://www.basketball-reference.com/}.
+#' @source Basketball Reference: \url{https://www.basketball-reference.com/}.
 "nba_all_elo"
 
 
@@ -572,7 +572,7 @@ NULL
 #'
 #' Can You Rule Riddler Nation? \url{https://fivethirtyeight.com/features/can-you-rule-riddler-nation/}
 #'
-#' The Battle For Riddler Nation, Round 2 \url{http://fivethirtyeight.com/features/the-battle-for-riddler-nation-round-2/}
+#' The Battle For Riddler Nation, Round 2 \url{https://fivethirtyeight.com/features/the-battle-for-riddler-nation-round-2/}
 #'
 #' Are You The Best Warlord? \url{https://fivethirtyeight.com/features/are-you-the-best-warlord/}
 #' 
@@ -601,7 +601,7 @@ NULL
 
 #' @description This contains the data behind the submissions for three rounds of the castles strategy puzzles: 
 #'
-#' The Battle For Riddler Nation, Round 2 \url{http://fivethirtyeight.com/features/the-battle-for-riddler-nation-round-2/} 
+#' The Battle For Riddler Nation, Round 2 \url{https://fivethirtyeight.com/features/the-battle-for-riddler-nation-round-2/} 
 #'
 #' Readers were asked to submit a strategy for the following “Colonel Blotto”-style game: 
 #'

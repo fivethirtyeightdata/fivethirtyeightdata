@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fivethirtyeightdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,7 +96,7 @@
       <h1 data-toc-skip>Bob Ross - Joy of Painting</h1>
                         <h4 class="author">Jonathan Bouchet</h4>
             
-            <h4 class="date">2020-07-21</h4>
+            <h4 class="date">2021-10-05</h4>
       
       
       <div class="hidden name"><code>bob_ross.Rmd</code></div>
@@ -107,27 +107,29 @@
     
 <p>This vignette is based on <a href="https://fivethirtyeight.com/features/a-statistical-analysis-of-the-work-of-bob-ross/">538 study : A statistical analysis of the work of Bob Ross</a>. Bob Ross was an american painter and host of the <em>The Joy of Painting</em>, an instructional television program that aired from 1983 to 1994 on PBS in the United States.</p>
 <p>Load required packages to reproduce analysis as well as the dataset.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">fivethirtyeight</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggthemes</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">knitr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">corrplot</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggraph</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">igraph</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rudeboybert/fivethirtyeight">fivethirtyeight</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></code></pre></div>
 <div id="data-explanation-and-cleaning" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-explanation-and-cleaning" class="anchor"></a>Data explanation and cleaning</h2>
 <p>The author of the article (W. Hickey) went through all Bob Ross’s paintings and coded the describing elements (trees, water, mountain, etc …) : when an element is present in a painting, it is encoding by 1 in the relevant column. He wasn’t able to analyze 3 paintings. There are also 2 episodes having the same title, so one of them is renamed to avoid errors during a group_by episode. In addition, there are 22 episodes where Bob Ross did not paint.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">bob_ross</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">bob_ross</span>
 <span class="co">#define incomplete paintings</span>
-<span class="no">incomplete</span> <span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"PURPLE MOUNTAIN RANGE"</span>,<span class="st">"COUNTRY CHARM"</span>,<span class="st">"PEACEFUL REFLECTIONS"</span>)
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">guest</span><span class="kw">==</span><span class="fl">0</span> <span class="kw">&amp;</span> !(<span class="no">title</span> <span class="kw">%in%</span> <span class="no">incomplete</span>))
+<span class="va">incomplete</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PURPLE MOUNTAIN RANGE"</span>,<span class="st">"COUNTRY CHARM"</span>,<span class="st">"PEACEFUL REFLECTIONS"</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">guest</span><span class="op">==</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="op">!</span><span class="op">(</span><span class="va">title</span> <span class="op">%in%</span> <span class="va">incomplete</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#check the 2 episodes with same name</span>
 <span class="co">#df %&gt;% filter(title=="LAKESIDE CABIN")</span>
-<span class="no">df</span>[<span class="no">df</span>$<span class="no">episode</span><span class="kw">==</span><span class="st">'S08E02'</span>,<span class="st">'title'</span>]<span class="kw">&lt;-</span><span class="st">'LAKESIDE CABIN 2'</span></pre></body></html></div>
+<span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">episode</span><span class="op">==</span><span class="st">'S08E02'</span>,<span class="st">'title'</span><span class="op">]</span><span class="op">&lt;-</span><span class="st">'LAKESIDE CABIN 2'</span></code></pre></div>
 <p>After removing the missing paintings, the dataframe consists of 66 features describing 378 paintings.</p>
 <p>Given the structure of the dataframe :</p>
 <p>##Study by Features</p>
@@ -139,11 +141,12 @@
 <div id="frequency" class="section level2">
 <h2 class="hasAnchor">
 <a href="#frequency" class="anchor"></a>Frequency</h2>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">#calculate the colSums for numeric columns and transpose the result</span>
-<span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">df</span> <span class="kw">%&gt;%</span>
-                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">episode</span>, -<span class="no">season</span>, -<span class="no">episode_num</span> ,-<span class="no">title</span>) <span class="kw">%&gt;%</span>
-                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_all</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(<span class="no">sum</span>)) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>())</pre></body></html></div>
-<pre><code>## Warning: `funs()` is deprecated as of dplyr 0.8.0.
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#calculate the colSums for numeric columns and transpose the result</span>
+<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">df</span> <span class="op">%&gt;%</span> 
+                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">episode</span>, <span class="op">-</span><span class="va">season</span>, <span class="op">-</span><span class="va">episode_num</span> ,<span class="op">-</span><span class="va">title</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_all</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span><span class="op">(</span><span class="va">sum</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning: `funs()` was deprecated in dplyr 0.8.0.
 ## Please use a list of either functions or lambdas: 
 ## 
 ##   # Simple named list: 
@@ -153,23 +156,23 @@
 ##   tibble::lst(mean, median)
 ## 
 ##   # Using lambdas
-##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co">#rename,switch columns and calculate percentage over all paintings and frequency though all episodes</span>
-<span class="no">per_features</span> <span class="kw">&lt;-</span> <span class="no">temp</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">feature</span><span class="kw">=</span><span class="no">rowname</span>, <span class="kw">tot</span> <span class="kw">=</span> <span class="no">V1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-    <span class="kw">feature_percentage</span> <span class="kw">=</span> (<span class="no">tot</span> / <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">tot</span>))*<span class="fl">100</span>,
-    <span class="kw">feature_percentage_Label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">feature_percentage</span>,<span class="fl">1</span>),<span class="st">"%"</span>),
-    <span class="kw">feature_freq</span> <span class="kw">=</span> <span class="no">tot</span>/ <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">df</span>)*<span class="fl">100</span>,
-    <span class="kw">feature_freq_label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">feature_freq</span>,<span class="fl">1</span>),<span class="st">"%"</span>))</pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">feature_freq_cut</span> <span class="kw">&lt;-</span> <span class="fl">10</span> <span class="co">#10% most present features</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span><span class="kw">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">per_features</span>,<span class="no">feature_freq</span><span class="kw">&gt;</span><span class="no">feature_freq_cut</span>), <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span>(<span class="no">feature</span>,<span class="no">feature_freq</span>),<span class="kw">y</span><span class="kw">=</span><span class="no">feature_freq</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span><span class="kw">=</span><span class="st">'identity'</span>) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">label</span><span class="kw">=</span><span class="no">feature_freq_label</span>), <span class="kw">position</span><span class="kw">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span>(<span class="kw">width</span><span class="kw">=</span><span class="fl">0.9</span>), <span class="kw">vjust</span><span class="kw">=</span><span class="fl">.5</span>,<span class="kw">hjust</span><span class="kw">=</span><span class="fl">0</span>,<span class="kw">size</span><span class="kw">=</span><span class="fl">2.5</span>,<span class="kw">color</span><span class="kw">=</span><span class="st">'red'</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() +
-  <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">'Features\'s appearance(%) through all episodes'</span>)</pre></body></html></div>
+##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#rename,switch columns and calculate percentage over all paintings and frequency though all episodes</span>
+<span class="va">per_features</span> <span class="op">&lt;-</span> <span class="va">temp</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>feature<span class="op">=</span><span class="va">rowname</span>, tot <span class="op">=</span> <span class="va">V1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+    feature_percentage <span class="op">=</span> <span class="op">(</span><span class="va">tot</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">tot</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span>, 
+    feature_percentage_Label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">feature_percentage</span>,<span class="fl">1</span><span class="op">)</span>,<span class="st">"%"</span><span class="op">)</span>, 
+    feature_freq <span class="op">=</span> <span class="va">tot</span><span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span>, 
+    feature_freq_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">feature_freq</span>,<span class="fl">1</span><span class="op">)</span>,<span class="st">"%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">feature_freq_cut</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co">#10% most present features</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">per_features</span>,<span class="va">feature_freq</span><span class="op">&gt;</span><span class="va">feature_freq_cut</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">feature</span>,<span class="va">feature_freq</span><span class="op">)</span>,y<span class="op">=</span><span class="va">feature_freq</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'identity'</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">feature_freq_label</span><span class="op">)</span>, position<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.9</span><span class="op">)</span>, vjust<span class="op">=</span><span class="fl">.5</span>,hjust<span class="op">=</span><span class="fl">0</span>,size<span class="op">=</span><span class="fl">2.5</span>,color<span class="op">=</span><span class="st">'red'</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">'Features\'s appearance(%) through all episodes'</span><span class="op">)</span></code></pre></div>
 <p><img src="bob_ross_files/figure-html/feature%20frequency%20plot-1.png" width="700"></p>
 <ul>
 <li>
@@ -180,15 +183,15 @@
 <h2 class="hasAnchor">
 <a href="#correlation" class="anchor"></a>Correlation</h2>
 <p>Since a row with no entries causes a standard deviation = 0, features are selected based on their number.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co">#find features present</span>
-<span class="no">top</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">per_features</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">tot</span><span class="kw">&gt;</span><span class="fl">1</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(-<span class="no">tot</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">feature</span>))
-<span class="no">num_data</span><span class="kw">&lt;-</span><span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/se-deprecated.html">select_</a></span>(<span class="kw">.dots</span> <span class="kw">=</span> <span class="no">top</span>$<span class="no">feature</span>)</pre></body></html></div>
-<pre><code>## Warning: `select_()` is deprecated as of dplyr 0.7.0.
-## Please use `select()` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">num_cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">num_data</span>, <span class="no">is.numeric</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">num_data</span>[,<span class="no">num_cols</span>]), <span class="kw">method</span><span class="kw">=</span><span class="st">'square'</span>,<span class="kw">order</span><span class="kw">=</span><span class="st">"AOE"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#find features present</span>
+<span class="va">top</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">per_features</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">tot</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">tot</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">feature</span><span class="op">)</span><span class="op">)</span>
+<span class="va">num_data</span><span class="op">&lt;-</span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/se-deprecated.html">select_</a></span><span class="op">(</span>.dots <span class="op">=</span> <span class="va">top</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning: `select_()` was deprecated in dplyr 0.7.0.
+## Please use `select()` instead.</code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">num_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">num_data</span>, <span class="va">is.numeric</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">num_data</span><span class="op">[</span>,<span class="va">num_cols</span><span class="op">]</span><span class="op">)</span>, method<span class="op">=</span><span class="st">'square'</span>,order<span class="op">=</span><span class="st">"AOE"</span><span class="op">)</span></code></pre></div>
 <p><img src="bob_ross_files/figure-html/feature%20correlation-1.png" width="700"></p>
 <ul>
 <li>we see positive correlation for the expected cases, like <code>tree</code> / <code>trees</code>, or <code>night</code> / <code>moon</code>
@@ -204,42 +207,45 @@
 <div id="episodes-having-the-greatest-number-of-features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#episodes-having-the-greatest-number-of-features" class="anchor"></a>Episodes having the greatest number of features</h3>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">per_episode</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">episode</span>,-<span class="no">season</span>,-<span class="no">episode_num</span> ,-<span class="no">title</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span>(<span class="no">is.numeric</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">episode</span><span class="kw">=</span><span class="fl">1</span>:<span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>()) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">item</span>, <span class="no">count</span>, -<span class="no">episode</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">episode</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">sum</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">count</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(-<span class="no">sum</span>)</pre></body></html></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co">#select a cut</span>
-<span class="no">cut_features</span><span class="kw">&lt;-</span><span class="fl">11</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span><span class="kw">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">per_episode</span>,<span class="no">sum</span><span class="kw">&gt;</span><span class="no">cut_features</span>), <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span>(<span class="no">episode</span>,<span class="no">sum</span>),<span class="kw">y</span><span class="kw">=</span><span class="no">sum</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span><span class="kw">=</span><span class="st">'identity'</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() + <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">'Paintings having more than '</span>, <span class="no">cut_features</span>,<span class="st">' features'</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">per_episode</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">episode</span>,<span class="op">-</span><span class="va">season</span>,<span class="op">-</span><span class="va">episode_num</span> ,<span class="op">-</span><span class="va">title</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>episode<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">item</span>, <span class="va">count</span>, <span class="op">-</span><span class="va">episode</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">episode</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">sum</span><span class="op">)</span>
+
+<span class="co">#select a cut</span>
+<span class="va">cut_features</span><span class="op">&lt;-</span><span class="fl">11</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">per_episode</span>,<span class="va">sum</span><span class="op">&gt;</span><span class="va">cut_features</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">episode</span>,<span class="va">sum</span><span class="op">)</span>,y<span class="op">=</span><span class="va">sum</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'identity'</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Paintings having more than '</span>, <span class="va">cut_features</span>,<span class="st">' features'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="bob_ross_files/figure-html/episode%20prep.-1.png" width="700"></p>
 </div>
 <div id="episodes-distribution-vs--their-number-of-features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#episodes-distribution-vs--their-number-of-features" class="anchor"></a>Episodes distribution vs. their number of features</h3>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">per_episode_summary</span> <span class="kw">&lt;-</span> <span class="no">per_episode</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">sum</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">tot_features</span><span class="kw">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>()) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-    <span class="kw">percent</span> <span class="kw">=</span> (<span class="no">tot_features</span>/ <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">tot_features</span>))*<span class="fl">100</span>,
-    <span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">percent</span>,<span class="fl">1</span>),<span class="st">"%"</span>))</pre></body></html></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span><span class="kw">=</span><span class="no">per_episode_summary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span><span class="kw">=</span><span class="no">sum</span>,<span class="kw">y</span><span class="kw">=</span><span class="no">tot_features</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span><span class="kw">=</span><span class="st">'identity'</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">label</span><span class="kw">=</span><span class="no">label</span>), <span class="kw">position</span><span class="kw">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span>(<span class="kw">width</span><span class="kw">=</span><span class="fl">0.9</span>), <span class="kw">vjust</span><span class="kw">=</span>-<span class="fl">1</span>,<span class="kw">hjust</span><span class="kw">=</span><span class="fl">.5</span>,<span class="kw">size</span><span class="kw">=</span><span class="fl">2.5</span>,<span class="kw">color</span><span class="kw">=</span><span class="st">'red'</span>)+
-  <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">'Distribution of paitings vs. \n number of features'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">per_episode_summary</span> <span class="op">&lt;-</span> <span class="va">per_episode</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sum</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>tot_features<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+    percent <span class="op">=</span> <span class="op">(</span><span class="va">tot_features</span><span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">tot_features</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span>, 
+    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">percent</span>,<span class="fl">1</span><span class="op">)</span>,<span class="st">"%"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">per_episode_summary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">sum</span>,y<span class="op">=</span><span class="va">tot_features</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'identity'</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">label</span><span class="op">)</span>, position<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.9</span><span class="op">)</span>, vjust<span class="op">=</span><span class="op">-</span><span class="fl">1</span>,hjust<span class="op">=</span><span class="fl">.5</span>,size<span class="op">=</span><span class="fl">2.5</span>,color<span class="op">=</span><span class="st">'red'</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">'Distribution of paitings vs. \n number of features'</span><span class="op">)</span></code></pre></div>
 <p><img src="bob_ross_files/figure-html/episoe%20plot-1.png" width="700"></p>
 <ul>
 <li>the mean number of features among all paintings is:</li>
 </ul>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">per_episode</span>$<span class="no">sum</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">per_episode</span><span class="op">$</span><span class="va">sum</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 8.015873</code></pre>
 </div>
 </div>
@@ -250,51 +256,55 @@
 <h3 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h3>
 <p>To further study the features’s correlation, a network analysis can be performed. In this case, for each painting an object <code>feature_i, feature_j</code> is built where i,j are indexes for a given painting. The <code>ggraph</code> package takes as input a dataframe with 2 columns and makes a graph network based on these 2 columns. The function below loops over all features in a given painting and make the graph connections.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="co">#function to loop an array of X features and return a DF with feature_1 | feature_2</span>
-<span class="no">make_connection</span><span class="kw">&lt;-</span><span class="kw">function</span>(<span class="no">x</span>){
-    <span class="no">feature_1</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>()
-    <span class="no">feature_2</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>()
-    <span class="no">cnt</span><span class="kw">&lt;-</span><span class="fl">1</span>
-    <span class="kw">for</span>(<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x</span>)-<span class="fl">1</span>)){
-        <span class="kw">for</span>(<span class="no">j</span> <span class="kw">in</span> (<span class="no">i</span>+<span class="fl">1</span>):(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">x</span>))){
-            <span class="no">feature_1</span>[<span class="no">cnt</span>]<span class="kw">&lt;-</span>(<span class="no">x</span>[<span class="no">i</span>,<span class="fl">1</span>])
-            <span class="no">feature_2</span>[<span class="no">cnt</span>]<span class="kw">&lt;-</span>(<span class="no">x</span>[<span class="no">j</span>,<span class="fl">1</span>])
-            <span class="no">cnt</span><span class="kw">&lt;-</span><span class="no">cnt</span>+<span class="fl">1</span>
-            }
-    }
-    <span class="no">res</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="st">"feature_1"</span><span class="kw">=</span><span class="no">feature_1</span>,<span class="st">"feature_2"</span><span class="kw">=</span><span class="no">feature_2</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">res</span>)
-}</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#function to loop an array of X features and return a DF with feature_1 | feature_2</span>
+<span class="va">make_connection</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">feature_1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="va">feature_2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="va">cnt</span><span class="op">&lt;-</span><span class="fl">1</span>
+    <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+        <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="op">(</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+            <span class="va">feature_1</span><span class="op">[</span><span class="va">cnt</span><span class="op">]</span><span class="op">&lt;-</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+            <span class="va">feature_2</span><span class="op">[</span><span class="va">cnt</span><span class="op">]</span><span class="op">&lt;-</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">j</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+            <span class="va">cnt</span><span class="op">&lt;-</span><span class="va">cnt</span><span class="op">+</span><span class="fl">1</span>
+            <span class="op">}</span>
+    <span class="op">}</span>
+    <span class="va">res</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"feature_1"</span><span class="op">=</span><span class="va">feature_1</span>,<span class="st">"feature_2"</span><span class="op">=</span><span class="va">feature_2</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 </div>
 <div id="result-with-all-paintings-for-the-first-season" class="section level3">
 <h3 class="hasAnchor">
 <a href="#result-with-all-paintings-for-the-first-season" class="anchor"></a>Result with all paintings for the first season</h3>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co">#create empty DF to store the results</span>
-<span class="no">season_1</span> <span class="kw">&lt;-</span> <span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">season</span><span class="kw">==</span><span class="fl">1</span>)
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#create empty DF to store the results</span>
+<span class="va">season_1</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">season</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="co">#empty dataframe to save all the connections</span>
-<span class="no">season1_res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="st">"feature_1"</span><span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span>(),<span class="st">"feature_2"</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span>())
+<span class="va">season1_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"feature_1"</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"feature_2"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">#loop over paintings in season 1</span>
-<span class="kw">for</span>(<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">season_1</span>)){
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">season_1</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
     <span class="co">#select features of ith painting and make a dataframe</span>
-    <span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">season_1</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">episode</span>, -<span class="no">season</span>, -<span class="no">episode_num</span> ,-<span class="no">title</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="no">i</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>())
-    <span class="no">pos_data</span> <span class="kw">&lt;-</span> <span class="no">temp</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">feature</span><span class="kw">=</span><span class="no">rowname</span>, <span class="kw">number</span> <span class="kw">=</span> <span class="no">V1</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">number</span><span class="kw">&gt;</span><span class="fl">0</span>)
-    <span class="no">res</span><span class="kw">&lt;-</span><span class="fu">make_connection</span>(<span class="no">pos_data</span>)
-    <span class="no">season1_res</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(<span class="no">season1_res</span>,<span class="no">res</span>)
-}</pre></body></html></div>
+    <span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">season_1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">episode</span>, <span class="op">-</span><span class="va">season</span>, <span class="op">-</span><span class="va">episode_num</span> ,<span class="op">-</span><span class="va">title</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">pos_data</span> <span class="op">&lt;-</span> <span class="va">temp</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>feature<span class="op">=</span><span class="va">rowname</span>, number <span class="op">=</span> <span class="va">V1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">number</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span>
+    <span class="va">res</span><span class="op">&lt;-</span><span class="fu">make_connection</span><span class="op">(</span><span class="va">pos_data</span><span class="op">)</span>
+    <span class="va">season1_res</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">season1_res</span>,<span class="va">res</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>The interesting thing is that we can apply some weights to the graph. The weights are based on the frequency of the connection between 2 features.</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">graph_s1</span> <span class="kw">&lt;-</span> <span class="no">season1_res</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">feature_1</span>, <span class="no">feature_2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">freq</span><span class="kw">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>())</pre></body></html></div>
-<pre><code>## `summarise()` regrouping output by 'feature_1' (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">graph_s1</span>)[<span class="fl">3</span>]<span class="kw">&lt;-</span><span class="st">'weight'</span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">graph_s1</span> <span class="op">&lt;-</span> <span class="va">season1_res</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">feature_1</span>, <span class="va">feature_2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>freq<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by 'feature_1'. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">graph_s1</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">&lt;-</span><span class="st">'weight'</span>
 
-<span class="no">g1</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph.data.frame</a></span>(<span class="no">graph_s1</span>)
-<span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span>(<span class="no">g1</span>,<span class="kw">layout</span><span class="kw">=</span><span class="st">'circle'</span>) +
-  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_fan.html">geom_edge_fan</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">width</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span>(<span class="no">g1</span>)$<span class="no">weight</span>),<span class="kw">alpha</span><span class="kw">=</span><span class="fl">.25</span>,<span class="kw">show.legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
-  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span>(<span class="kw">size</span><span class="kw">=</span><span class="fl">6</span>,<span class="kw">color</span><span class="kw">=</span><span class="st">"red"</span>,<span class="kw">alpha</span><span class="kw">=</span><span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">label</span> <span class="kw">=</span> <span class="no">name</span>)) + <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">'Features network of all paintings of season 1'</span>)</pre></body></html></div>
+<span class="va">g1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph.data.frame</a></span><span class="op">(</span><span class="va">graph_s1</span><span class="op">)</span>
+<span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g1</span>,layout<span class="op">=</span><span class="st">'circle'</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_fan.html">geom_edge_fan</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>width<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">g1</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span>,alpha<span class="op">=</span><span class="fl">.25</span>,show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">6</span>,color<span class="op">=</span><span class="st">"red"</span>,alpha<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">'Features network of all paintings of season 1'</span><span class="op">)</span></code></pre></div>
 <p><img src="bob_ross_files/figure-html/network%20plot-1.png" width="700"></p>
 <ul>
 <li>larger width indicate the frequency of this correlation</li>
@@ -319,7 +329,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
