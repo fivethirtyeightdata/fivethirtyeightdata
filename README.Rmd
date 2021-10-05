@@ -24,7 +24,7 @@ all_fivethirtyeightdata_datasets <- data(package = "fivethirtyeightdata")$result
 
 # fivethirtyeightdata
 
-`fivethirtyeightdata` is an add-on R data package to the [`fivethirtyeight`](fivethirtyeight-r.netlify.com/) package that contains user-contributed `vignettes/`
+`fivethirtyeightdata` is an add-on R data package to the [`fivethirtyeight`](fivethirtyeight-r.netlify.app/) package that contains user-contributed `vignettes/`
 and `r all_fivethirtyeightdata_datasets %>% nrow()` datasets that could not be included in `fivethirtyeight` due to CRAN package size restrictions:
 
 ```{r echo=FALSE}
